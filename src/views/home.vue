@@ -1,6 +1,6 @@
 <template>
   <md-list class="md-triple-line">
-    <md-list-item v-for="topic in topics" :key="topic.id">
+    <md-list-item v-for="topic in topics.list" :key="topic.id">
       <md-avatar>
         <img :src="topic.author.avatar_url" :alt="topic.author.loginname">
       </md-avatar>
@@ -13,6 +13,9 @@
       </div>
       <md-divider></md-divider>
     </md-list-item>
+    <md-list-item v-if="topics.hasMore" class="loading">
+      <md-spinner md-indeterminate></md-spinner>
+    </md-list-item>
   </md-list>
 </template>
 
@@ -21,14 +24,27 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
   computed: mapGetters([
-    'topics'
+    'topics', 'loading'
   ]),
   created () {
-    if (this.topics.length === 0) this.getTopics()
+    if (this.topics.list.length === 0) this.getTopics()
   },
-  methods: mapActions([
-    'getTopics'
-  ])
+  methods: {
+    ...mapActions([
+      'getTopics'
+    ]),
+    scroll (event) {
+      if (this.loading ||
+        event.target.scrollHeight - event.target.offsetHeight - event.target.scrollTop > 200) return
+      this.getTopics()
+    }
+  },
+  mounted () {
+    if (this.topics.hasMore) this.$el.addEventListener('scroll', this.scroll)
+  },
+  beforeDestroy () {
+    this.$el.removeEventListener('scroll', this.scroll)
+  }
 }
 </script>
 
@@ -36,5 +52,8 @@ export default {
 <style scoped>
 .md-triple-line{
   padding: 0;
+}
+.loading .md-spinner{
+  margin: auto;
 }
 </style>

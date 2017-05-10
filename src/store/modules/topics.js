@@ -8,7 +8,7 @@ const state = {
 }
 
 const getters = {
-  topics: state => state.list
+  topics: state => state
 }
 
 const mutations = {
