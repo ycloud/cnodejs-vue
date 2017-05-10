@@ -11,6 +11,13 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/topic/:id',
+      name: 'TopicShow',
+      component (resolve) {
+        require(['@/views/topic/show'], resolve)
+      }
     }
   ]
 })
