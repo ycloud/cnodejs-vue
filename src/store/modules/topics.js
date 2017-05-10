@@ -33,7 +33,7 @@ const actions = {
     return api.getTopic(id)
     .then(topic => {
       commit(types.UPDATE_TOPIC, topic)
-      return Promise.resolve(topic)
+      return topic
     })
   },
   getTopics ({commit, state}) {
