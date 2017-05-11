@@ -121,9 +121,15 @@ export default {
   order: 9;
   z-index: 1;
 }
+.md-bottom-bar + div{
+  width: 100%;
+  height: calc(100% - 56px);
+}
 .wrap{
   flex: 1;
   overflow-y: auto;
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 @media (min-width: 768px){
   .md-toolbar{
@@ -131,6 +137,9 @@ export default {
   }
   .md-bottom-bar{
     display: none;
+  }
+  .md-bottom-bar + div{
+    height: calc(100% - 64px);
   }
 }
 </style>
