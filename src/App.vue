@@ -49,24 +49,24 @@ export default {
 </script>
 
 <style scoped>
-#app {
+#app{
   position: absolute;
   width: 100%;
   height: 100%;
 }
-#app > .loading {
+#app > .loading{
   position: absolute;
 }
-.md-theme-default.md-progress {
+.md-theme-default.md-progress{
   background: rgba(255, 255, 255, 0.38);
 }
-#app .md-title {
+#app .md-title{
   flex: 1;
 }
-.md-subheading {
+.md-toolbar{
   display: none;
 }
-.md-subheading .has-ripple {
+.md-subheading .has-ripple{
   padding: 20px;
   display: inline-block;
   position: relative;
@@ -86,11 +86,11 @@ export default {
   flex: 1;
   overflow-y: auto;
 }
-@media (min-width: 768px) {
-  .md-subheading {
-    display: block;
+@media (min-width: 768px){
+  .md-toolbar{
+    display: flex;
   }
-  .md-bottom-bar {
+  .md-bottom-bar{
     display: none;
   }
 }

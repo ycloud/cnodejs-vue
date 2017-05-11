@@ -8,13 +8,11 @@
       </md-avatar>
       <div class="md-list-text-container">
         <router-link :to="'/topic/' + topic.id" tag="span">{{topic.title}}</router-link>
-        <router-link :to="'/user/' + topic.author.loginname" tag="span">{{topic.author.loginname}}</router-link>
+        <router-link :to="'/topic/' + topic.id" tag="span">{{topic.reply_count}}/{{topic.visit_count}}</router-link>
       </div>
-      <div class="md-list-action">
+      <div class="md-list-action md-body-1">
         <router-link :to="'/topic/' + topic.id" tag="span">
-          {{topic.reply_count}}/{{topic.visit_count}}
-          <br>
-          {{topic.last_reply_at | fromNow}}
+        {{topic.last_reply_at | fromNow}}
         </router-link>
       </div>
       <md-divider></md-divider>
@@ -68,12 +66,12 @@ export default {
   flex: 1;
 }
 .md-list-action{
-  width: 86px;
+  width: 62px;
   text-align: right;
 }
 @media (min-width: 768px) {
   .md-list-action{
-    width: 100px;
+    width: auto;
   }
 }
 </style>
