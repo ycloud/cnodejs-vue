@@ -4,7 +4,7 @@
       <md-card-header>
         <md-card-header-text>
           <div class="md-title">{{user.loginname}}</div>
-          <div class="md-subhead">{{user.score}}积分</div>
+          <div class="md-subhead">{{user.score}}积分 注册于 {{user.create_at | fromNow}}</div>
         </md-card-header-text>
         <md-card-media>
           <md-avatar class="md-large">
