@@ -54,6 +54,9 @@ export default {
   watch: {
     error (error) {
       !error || this.$refs.alert.open()
+    },
+    $route () {
+      this.$refs.wrap.$el.scrollTop = 0
     }
   },
   methods: {
@@ -77,9 +80,6 @@ export default {
   },
   mounted () {
     window.addEventListener('popstate', this.popstate)
-  },
-  updated () {
-    this.$refs.wrap.$el.scrollTop = 0
   },
   beforeDestroy () {
     window.removeEventListener('popstate', this.popstate)
