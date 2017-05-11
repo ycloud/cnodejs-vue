@@ -10,6 +10,7 @@
 
 <script>
 import marked from 'marked'
+import mixin from '@/components/mixin'
 import store from '@/store'
 import { mapActions } from 'vuex'
 
@@ -46,6 +47,7 @@ export default {
       'getTopic'
     ]),
     marked
-  }
+  },
+  mixins: [mixin]
 }
 </script>

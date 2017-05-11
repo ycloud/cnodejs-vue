@@ -1,7 +1,6 @@
 <template>
   <md-list class="md-triple-line" v-title data-title="cnodejs vue share.la">
-    <md-list-item class="has-ripple" v-for="topic in topics.list" :key="topic.id">
-      <md-ink-ripple />
+    <md-list-item v-for="topic in topics.list" :key="topic.id">
       <md-avatar>
         <router-link :to="'/user/' + topic.author.loginname">
         <img :src="topic.author.avatar_url" :alt="topic.author.loginname">
@@ -27,6 +26,7 @@
 </template>
 
 <script>
+import mixin from '@/components/mixin'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -46,6 +46,7 @@ export default {
       this.getTopics()
     }
   },
+  mixins: [mixin],
   mounted () {
     if (this.topics.hasMore) this.$el.addEventListener('scroll', this.scroll)
   },
