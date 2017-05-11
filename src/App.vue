@@ -3,20 +3,14 @@
     <md-toolbar class="md-dense">
       <h2 class="md-title">cnodejs vue share.la</h2>
       <div class="md-subheading">
-        <router-link to="/" exact class="has-ripple"><md-ink-ripple />首页</router-link>
-        <router-link to="/collect" class="has-ripple"><md-ink-ripple />收藏</router-link>
-        <router-link to="/message" class="has-ripple"><md-ink-ripple />消息</router-link>
-        <router-link to="/m" class="has-ripple"><md-ink-ripple />我</router-link>
+        <router-link v-for="nav in navs" :to="nav.to" class="has-ripple" :key="nav.to"><md-ink-ripple />{{nav.text}}</router-link>
       </div>
     </md-toolbar>
     <md-bottom-bar>
-      <md-bottom-bar-item md-icon="home" md-active>首页</md-bottom-bar-item>
-      <md-bottom-bar-item md-icon="favorite">收藏</md-bottom-bar-item>
-      <md-bottom-bar-item md-icon="notifications">消息</md-bottom-bar-item>
-      <md-bottom-bar-item md-icon="person">我</md-bottom-bar-item>
+      <md-bottom-bar-item v-for="nav in navs" :md-icon="nav.icon" :key="nav.to" @click.native="$router.push(nav.to)">{{nav.text}}</md-bottom-bar-item>
     </md-bottom-bar>
     <md-layout>
-      <router-view class="wrap"></router-view>
+      <router-view @scroll.native="scroll" class="wrap" ref="wrap"></router-view>
     </md-layout>
     <md-progress v-if="loading" class="loading" md-indeterminate></md-progress>
     <md-dialog-alert :md-content="error || '出错了！'" md-ok-text="知道了" ref="alert"></md-dialog-alert>
@@ -28,6 +22,32 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'app',
+  data () {
+    return {
+      navs: [
+        {
+          icon: 'home',
+          text: '首页',
+          to: '/'
+        },
+        {
+          icon: 'favorite',
+          text: '收藏',
+          to: '/collect'
+        },
+        {
+          icon: 'notifications',
+          text: '消息',
+          to: '/message'
+        },
+        {
+          icon: 'person',
+          text: '我',
+          to: '/m'
+        }
+      ]
+    }
+  },
   computed: mapGetters([
     'error', 'loading'
   ]),
@@ -43,7 +63,26 @@ export default {
       this.timer = setTimeout(() => {
         self.$store.commit('SET_ERROR', '')
       }, 80)
+    },
+    scroll (event) {
+      let state = history.state || {}
+      state.scrollTop = event.target.scrollTop
+      history.replaceState(state, null)
+    },
+    popstate (event) {
+      if (event.state && event.state.scrollTop) {
+        this.$refs.wrap.$el.scrollTop = event.state.scrollTop
+      }
     }
+  },
+  mounted () {
+    window.addEventListener('popstate', this.popstate)
+  },
+  updated () {
+    this.$refs.wrap.$el.scrollTop = 0
+  },
+  beforeDestroy () {
+    window.removeEventListener('popstate', this.popstate)
   }
 }
 </script>

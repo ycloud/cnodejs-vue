@@ -22,12 +22,6 @@ Vue.directive('title', (el, binding) => {
 
 Vue.filter('fromNow', time => moment(time).fromNow())
 
-window.addEventListener('popstate', event => {
-  if (event.state && event.state.scrollTop) {
-    document.querySelector('.wrap').scrollTop = event.state.scrollTop
-  }
-})
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

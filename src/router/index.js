@@ -14,9 +14,16 @@ export default new Router({
     },
     {
       path: '/topic/:id',
-      name: 'TopicShow',
+      name: 'Topic',
       component (resolve) {
-        require(['@/views/topic/show'], resolve)
+        require(['@/views/show'], resolve)
+      }
+    },
+    {
+      path: '/user/:loginname',
+      name: 'User',
+      component (resolve) {
+        require(['@/views/user'], resolve)
       }
     }
   ]

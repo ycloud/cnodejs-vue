@@ -1,5 +1,5 @@
 <template>
-  <md-list class="md-triple-line" v-title data-title="cnodejs vue share.la">
+  <md-list @scroll.native="scroll" class="md-triple-line" v-title data-title="cnodejs vue share.la">
     <md-list-item v-for="topic in topics.list" :key="topic.id">
       <md-avatar>
         <router-link :to="'/user/' + topic.author.loginname">
@@ -17,14 +17,13 @@
       </div>
       <md-divider></md-divider>
     </md-list-item>
-    <md-list-item class="spinner-loading">
+    <md-list-item>
       <md-spinner md-indeterminate></md-spinner>
     </md-list-item>
   </md-list>
 </template>
 
 <script>
-import mixin from '@/components/mixin'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -43,13 +42,6 @@ export default {
         event.target.scrollHeight - event.target.offsetHeight - event.target.scrollTop > 200) return
       this.getTopics()
     }
-  },
-  mixins: [mixin],
-  mounted () {
-    if (this.topics.hasMore) this.$el.addEventListener('scroll', this.scroll)
-  },
-  beforeDestroy () {
-    this.$el.removeEventListener('scroll', this.scroll)
   }
 }
 </script>
@@ -68,6 +60,9 @@ export default {
 .md-list-action{
   width: 62px;
   text-align: right;
+}
+.md-spinner{
+  margin: auto;
 }
 @media (min-width: 768px) {
   .md-list-action{

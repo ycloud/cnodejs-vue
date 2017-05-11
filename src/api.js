@@ -27,5 +27,6 @@ http.interceptors.response.use((response) => {
 
 export default {
   getTopic: id => get(`/topics/${id}`),
-  getTopics: data => get('/topics', data)
+  getTopics: data => get('/topics', data),
+  getUser: loginname => get(`/users/${loginname}`)
 }
