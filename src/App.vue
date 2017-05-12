@@ -1,6 +1,6 @@
 <template>
   <md-layout md-column md-gutter id="app">
-    <md-toolbar class="md-dense">
+    <md-toolbar @touchmove.native.prevent class="md-dense">
       <h2 class="md-title">cnodejs vue share.la</h2>
       <div class="md-subheading">
         <router-link v-for="nav in navs" :to="nav.to" class="has-ripple" :key="nav.to" :active="module === nav.module"><md-ink-ripple />{{nav.label}}</router-link>

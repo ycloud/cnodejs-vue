@@ -38,6 +38,7 @@ const state = {
 
 const getters = {
   tab: state => state.tab,
+  tabs: state => state.tabs,
   topics: state => state.tabs.find(tab => {
     return tab.id === state.tab
   })
