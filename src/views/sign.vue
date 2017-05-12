@@ -3,7 +3,7 @@
     <form novalidate @submit.stop.prevent="submit">
       <md-input-container>
         <label>Access Token</label>
-        <md-input v-model="token" placeholder="Access Token" required></md-input>
+        <md-input v-model="token" placeholder="Access Token" autofocus required></md-input>
       </md-input-container>
       <md-button class="md-raised md-primary" type="submit">登录</md-button>
     </form>
@@ -19,6 +19,24 @@ export default {
       token: ''
     }
   },
+  beforeRouteEnter (to, from, next) {
+    let token = localStorage.getItem('token')
+    if (token) {
+      next(vm => {
+        vm.hasLocalToken = true
+        vm.sign(token)
+          .then(() => {
+            vm.$router.replace(vm.$route.query.redirect || '/m')
+          })
+          .catch(() => {
+            vm.hasLocalToken = false
+            localStorage.removeItem('token')
+          })
+      })
+    } else {
+      next()
+    }
+  },
   methods: {
     ...mapActions([
       'sign'
@@ -28,7 +46,8 @@ export default {
       if (!/^[a-z\d\\-]{36}$/i.test(this.token)) return this.$store.commit('SET_ERROR', 'Access Token 格式错误！')
       this.sign(this.token)
         .then(() => {
-          this.$router.replace(this.$route.query.redirect)
+          localStorage.setItem('token', this.token)
+          this.$router.replace(this.$route.query.redirect || '/m')
         })
     }
   }

@@ -11,6 +11,7 @@
             <img :src="user.avatar_url
             " :alt="user.loginname">
           </md-avatar>
+          <span v-if="$route.name === 'Me'" @click="doSignout" class="md-caption">退出</span>
         </md-card-media>
       </md-card-header>
     </md-card>
@@ -73,8 +74,8 @@ export default {
     'loginname'
   ]),
   watch: {
-    $route () {
-      this.$route.name === 'Me' || this.getUser(this.$route.params.loginname)
+    $route (route) {
+      route.name === 'Me' || this.getUser(route.params.loginname)
         .then(user => {
           this.user = user
         })
@@ -84,12 +85,29 @@ export default {
         })
     }
   },
-  methods: mapActions([
-    'getUser'
-  ])
+  methods: {
+    ...mapActions([
+      'getUser', 'signout'
+    ]),
+    doSignout () {
+      this.signout()
+      localStorage.removeItem('token')
+      this.$router.replace('/sign')
+    }
+  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.md-card .md-card-header .md-card-media{
+  width: 64px;
+  flex: 0 0 64px;
+  text-align: center;
+}
+.md-card .md-card-header .md-avatar{
+  display: block;
+  float: none;
+  margin: 0 0 5px;
+}
 </style>

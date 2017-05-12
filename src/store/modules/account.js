@@ -18,11 +18,17 @@ const mutations = {
 }
 
 const actions = {
-  sign ({commit, state}, token) {
+  sign ({commit}, token) {
     return api.postToken(token)
     .then(user => {
       commit(types.SET_TOKEN, token)
       commit(types.UPDATE_USER, user)
+    })
+  },
+  signout ({commit}, token) {
+    commit(types.SET_TOKEN, '')
+    commit(types.UPDATE_USER, {
+      loginname: ''
     })
   }
 }
