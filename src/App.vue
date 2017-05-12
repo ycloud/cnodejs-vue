@@ -3,11 +3,11 @@
     <md-toolbar class="md-dense">
       <h2 class="md-title">cnodejs vue share.la</h2>
       <div class="md-subheading">
-        <router-link v-for="nav in navs" :to="nav.to" class="has-ripple" :key="nav.to" :active="module === nav.module"><md-ink-ripple />{{nav.text}}</router-link>
+        <router-link v-for="nav in navs" :to="nav.to" class="has-ripple" :key="nav.to" :active="module === nav.module"><md-ink-ripple />{{nav.label}}</router-link>
       </div>
     </md-toolbar>
     <md-bottom-bar>
-      <md-bottom-bar-item v-for="nav in navs" :md-icon="nav.icon" :md-active="module === nav.module" :key="nav.to" @click.native="$router.push(nav.to)">{{nav.text}}</md-bottom-bar-item>
+      <md-bottom-bar-item v-for="nav in navs" :md-icon="nav.icon" :md-active="module === nav.module" :key="nav.to" @click.native="$router.push(nav.to)">{{nav.label}}</md-bottom-bar-item>
     </md-bottom-bar>
     <md-layout>
       <router-view @click.native="link" @scroll.native="scroll" class="wrap" ref="wrap"></router-view>
@@ -28,25 +28,25 @@ export default {
         {
           icon: 'home',
           module: 'Home',
-          text: '话题',
+          label: '话题',
           to: '/'
         },
         {
           icon: 'favorite',
           module: 'Collect',
-          text: '收藏',
+          label: '收藏',
           to: '/collect'
         },
         {
           icon: 'notifications',
           module: 'Message',
-          text: '消息',
+          label: '消息',
           to: '/message'
         },
         {
           icon: 'person',
           module: 'Me',
-          text: '我',
+          label: '我',
           to: '/m'
         }
       ]
@@ -110,6 +110,8 @@ export default {
 }
 #app > .loading{
   position: absolute;
+  top: 0;
+  z-index: 9;
 }
 .md-theme-default.md-progress{
   background: rgba(255, 255, 255, 0.38);
