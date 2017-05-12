@@ -1,5 +1,5 @@
 <template>
-  <md-list @click.native.self="showId = null">
+  <md-list v-title data-title="收到的消息" @click.native.self="showId = null">
     <md-list-item v-for="message in messages" :key="message.id" :class="{active: showId === message.id}">
       <md-card md-with-hover @click.native="showId = message.id">
         <md-ink-ripple />

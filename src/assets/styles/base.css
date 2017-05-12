@@ -1,0 +1,3 @@
+.md-list.md-triple-line.md-dense .md-list-item .md-list-item-container{
+  min-height: 64px;
+}
