@@ -3,17 +3,17 @@
     <md-toolbar class="md-dense">
       <h2 class="md-title">cnodejs vue share.la</h2>
       <div class="md-subheading">
-        <router-link v-for="nav in navs" :to="nav.to" class="has-ripple" :key="nav.to"><md-ink-ripple />{{nav.text}}</router-link>
+        <router-link v-for="nav in navs" :to="nav.to" class="has-ripple" :key="nav.to" :active="module === nav.module"><md-ink-ripple />{{nav.text}}</router-link>
       </div>
     </md-toolbar>
     <md-bottom-bar>
-      <md-bottom-bar-item v-for="nav in navs" :md-icon="nav.icon" :key="nav.to" @click.native="$router.push(nav.to)">{{nav.text}}</md-bottom-bar-item>
+      <md-bottom-bar-item v-for="nav in navs" :md-icon="nav.icon" :md-active="module === nav.module" :key="nav.to" @click.native="$router.push(nav.to)">{{nav.text}}</md-bottom-bar-item>
     </md-bottom-bar>
     <md-layout>
       <router-view @scroll.native="scroll" class="wrap" ref="wrap"></router-view>
     </md-layout>
     <md-progress v-if="loading" class="loading" md-indeterminate></md-progress>
-    <md-dialog-alert :md-content="error || '出错了！'" md-ok-text="知道了" ref="alert"></md-dialog-alert>
+    <md-dialog-alert :md-content="error || '出错了！'" md-ok-text="知道了" ref="alert" @close="close"></md-dialog-alert>
   </md-layout>
 </template>
 
@@ -27,21 +27,25 @@ export default {
       navs: [
         {
           icon: 'home',
+          module: 'Home',
           text: '首页',
           to: '/'
         },
         {
           icon: 'favorite',
+          module: 'Collect',
           text: '收藏',
           to: '/collect'
         },
         {
           icon: 'notifications',
+          module: 'Message',
           text: '消息',
           to: '/message'
         },
         {
           icon: 'person',
+          module: 'Me',
           text: '我',
           to: '/m'
         }
@@ -49,23 +53,22 @@ export default {
     }
   },
   computed: mapGetters([
-    'error', 'loading'
+    'error', 'module', 'loading'
   ]),
   watch: {
     error (error) {
       !error || this.$refs.alert.open()
     },
     $route () {
-      this.$refs.wrap.$el.scrollTop = 0
+      if (this.$refs.wrap) this.$refs.wrap.$el.scrollTop = 0
     }
   },
   methods: {
     close () {
-      let self = this
       clearTimeout(this.timer)
       this.timer = setTimeout(() => {
-        self.$store.commit('SET_ERROR', '')
-      }, 80)
+        this.$store.commit('SET_ERROR', '')
+      }, 192)
     },
     scroll (event) {
       let state = history.state || {}
@@ -114,7 +117,7 @@ export default {
 .md-subheading .has-ripple:hover{
   color: #fff;
 }
-.md-subheading .has-ripple.router-link-active{
+.md-subheading a[active]{
   color: #fff;
 }
 .md-bottom-bar{

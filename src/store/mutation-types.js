@@ -1,5 +1,8 @@
 export const TOGGLE_LOADING = 'TOGGLE_LOADING'
 export const SET_ERROR = 'SET_ERROR'
+export const SET_MODULE = 'SET_MODULE'
+export const SET_TOKEN = 'SET_TOKEN'
 export const UPDATE_TOPIC = 'UPDATE_TOPIC'
 export const UPDATE_TOPICS = 'UPDATE_TOPICS'
+export const UPDATE_USER = 'UPDATE_USER'
 export const UPDATE_USERS = 'UPDATE_USERS'

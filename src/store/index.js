@@ -1,5 +1,6 @@
 import getters from './getters'
 import mutations from './mutations'
+import account from './modules/account'
 import topics from './modules/topics'
 import users from './modules/users'
 import Vue from 'vue'
@@ -10,12 +11,15 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   getters,
   modules: {
+    account,
     topics,
     users
   },
   mutations,
   state: {
     error: '',
-    loading: false
+    loading: false,
+    module: 'Home',
+    token: ''
   }
 })

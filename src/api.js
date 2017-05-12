@@ -28,5 +28,6 @@ http.interceptors.response.use((response) => {
 export default {
   getTopic: id => get(`/topics/${id}`),
   getTopics: data => get('/topics', data),
-  getUser: loginname => get(`/users/${loginname}`)
+  getUser: loginname => get(`/users/${loginname}`),
+  postToken: accesstoken => http.post('https://cnodejs.org/api/v1/accesstoken', {accesstoken})
 }

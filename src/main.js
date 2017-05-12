@@ -22,6 +22,28 @@ Vue.directive('title', (el, binding) => {
 
 Vue.filter('fromNow', time => moment(time).fromNow())
 
+router.beforeEach((to, from, next) => {
+  store.commit('SET_MODULE', to.meta.module)
+  if (to.matched.some(record => record.meta.requiresAuth === true)) {
+    if (store.getters.token === '') {
+      next({
+        path: '/sign',
+        query: {redirect: to.fullPath}
+      })
+    } else {
+      next()
+    }
+  } else if (to.matched.some(record => record.meta.requiresAuth === false)) {
+    if (store.getters.token !== '') {
+      next(to.query.redirect || '/m')
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
