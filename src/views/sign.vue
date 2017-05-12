@@ -1,5 +1,5 @@
 <template>
-  <div class="sign" v-title data-title="登录">
+  <md-layout md-column md-align="center" class="sign" v-title data-title="登录">
     <form v-if="!hasLocalToken" novalidate @submit.stop.prevent="submit">
       <md-input-container>
         <label>Access Token</label>
@@ -7,7 +7,7 @@
       </md-input-container>
       <md-button class="md-raised md-primary" type="submit">登录</md-button>
     </form>
-  </div>
+  </md-layout>
 </template>
 
 <script>
@@ -57,7 +57,7 @@ export default {
 
 <style scoped>
 .sign{
-  padding:30% 32px 0;
+  padding:0 32px;
 }
 .md-button[type=submit]{
   display: block;

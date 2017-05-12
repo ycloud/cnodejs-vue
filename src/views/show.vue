@@ -17,7 +17,7 @@
       <md-subheader>{{topic.reply_count}}回复</md-subheader>
       <md-list class="md-triple-line md-dense replys">
         <md-list-item v-for="reply in topic.replies" :key="reply.id">
-          <md-layout class="replay-layout">
+          <md-layout md-column>
             <md-layout class="replay-author">
               <md-avatar>
                 <router-link :to="'/user/' + reply.author.loginname">
@@ -88,9 +88,6 @@ export default {
 
 <style scoped>
 .md-list.md-dense .md-list-item .md-list-item-container .md-avatar{margin-right:16px;}
-.replay-layout{
-  flex-direction: column;
-}
 .replay-author{
   align-items: center;
   padding-top: 16px;
