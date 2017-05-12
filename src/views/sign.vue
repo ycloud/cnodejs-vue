@@ -1,6 +1,6 @@
 <template>
   <div class="sign" v-title data-title="登录">
-    <form novalidate @submit.stop.prevent="submit">
+    <form v-if="!hasLocalToken" novalidate @submit.stop.prevent="submit">
       <md-input-container>
         <label>Access Token</label>
         <md-input v-model="token" placeholder="Access Token" autofocus required></md-input>
@@ -16,6 +16,7 @@ import { mapActions } from 'vuex'
 export default {
   data () {
     return {
+      hasLocalToken: false,
       token: ''
     }
   },
