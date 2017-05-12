@@ -36,7 +36,7 @@
                 </span>
               </div>
             </md-layout>
-            <div class="md-body-2" @click="link" v-html="marked(reply.content)"></div>
+            <div class="md-body-2" v-html="marked(reply.content)"></div>
           </md-layout>
           <md-divider></md-divider>
         </md-list-item>
@@ -81,13 +81,6 @@ export default {
     ...mapActions([
       'getTopic'
     ]),
-    link (event) {
-      let href = event.target.getAttribute('href') || ''
-      if (href.startsWith('/user/')) {
-        event.preventDefault()
-        this.$router.push(href)
-      }
-    },
     marked
   }
 }

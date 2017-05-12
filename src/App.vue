@@ -10,7 +10,7 @@
       <md-bottom-bar-item v-for="nav in navs" :md-icon="nav.icon" :md-active="module === nav.module" :key="nav.to" @click.native="$router.push(nav.to)">{{nav.text}}</md-bottom-bar-item>
     </md-bottom-bar>
     <md-layout>
-      <router-view @scroll.native="scroll" class="wrap" ref="wrap"></router-view>
+      <router-view @click.native="link" @scroll.native="scroll" class="wrap" ref="wrap"></router-view>
     </md-layout>
     <md-progress v-if="loading" class="loading" md-indeterminate></md-progress>
     <md-dialog-alert :md-content="error || '出错了！'" md-ok-text="知道了" ref="alert" @close="close"></md-dialog-alert>
@@ -70,15 +70,27 @@ export default {
         this.$store.commit('SET_ERROR', '')
       }, 192)
     },
-    scroll (event) {
-      let state = history.state || {}
-      state.scrollTop = event.target.scrollTop
-      history.replaceState(state, null)
+    link (event) {
+      let href = event.target.getAttribute('href')
+      if (href === null) return
+      if (href.startsWith('/user/')) {
+        event.preventDefault()
+        this.$router.push(href)
+      }
+      if (!href.startsWith('/')) {
+        event.preventDefault()
+        open(href)
+      }
     },
     popstate (event) {
       if (event.state && event.state.scrollTop) {
         this.$refs.wrap.$el.scrollTop = event.state.scrollTop
       }
+    },
+    scroll (event) {
+      let state = history.state || {}
+      state.scrollTop = event.target.scrollTop
+      history.replaceState(state, null)
     }
   },
   mounted () {

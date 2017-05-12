@@ -1,6 +1,7 @@
 import getters from './getters'
 import mutations from './mutations'
 import account from './modules/account'
+import messages from './modules/messages'
 import topics from './modules/topics'
 import users from './modules/users'
 import Vue from 'vue'
@@ -12,6 +13,7 @@ export default new Vuex.Store({
   getters,
   modules: {
     account,
+    messages,
     topics,
     users
   },
