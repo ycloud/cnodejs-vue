@@ -1,3 +1,6 @@
 .md-list.md-triple-line.md-dense .md-list-item .md-list-item-container{
   min-height: 64px;
 }
+.md-list.md-triple-line.md-dense .md-list-text-container>:first-child{
+  font-size: 14px;
+}

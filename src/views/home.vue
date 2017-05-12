@@ -57,9 +57,14 @@ export default {
 .md-list-item div.md-list-text-container{
   flex: 1;
 }
+.md-list-text-container>:first-child{
+  font-size: 14px;
+}
 .md-list-action{
   width: 62px;
   text-align: right;
+  white-space: nowrap;
+  color: rgba(0,0,0,.54);
 }
 .md-spinner{
   margin: auto;

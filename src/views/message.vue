@@ -4,7 +4,7 @@
       <md-card md-with-hover @click.native="showId = message.id">
         <md-ink-ripple />
         <md-card-header>
-          <div class="md-subheading"><router-link :to="'/user/' + message.author.loginname">{{message.author.loginname}}</router-link> 在话题 <router-link :to="'/topic/' + message.topic.id">{{message.topic.title}}</router-link> 中@了你</div>
+          <div class="md-body-1"><router-link :to="'/user/' + message.author.loginname">{{message.author.loginname}}</router-link> 在话题 <router-link :to="'/topic/' + message.topic.id">{{message.topic.title}}</router-link> 中@了你</div>
         </md-card-header>
         <md-card-content v-show="showId === message.id" v-html="marked(message.reply.content)">
         </md-card-content>
@@ -48,6 +48,7 @@ export default {
 .md-list .md-card-content{
   padding-bottom: 0;
   margin-top: -14px;
+  color: rgba(0, 0, 0, .54);
 }
 .md-list .active{
   margin: 16px 0;

@@ -28,7 +28,7 @@ export default {
         {
           icon: 'home',
           module: 'Home',
-          text: '首页',
+          text: '话题',
           to: '/'
         },
         {

@@ -17,6 +17,7 @@
     <br>
     <md-card v-if="user.loginname">
       <md-subheader>最近创建的话题</md-subheader>
+      <md-card-content v-if="user.recent_topics.length === 0">无话题</md-card-content>
       <md-list class="md-triple-line md-dense">
         <md-list-item v-for="topic in user.recent_topics" :key="topic.id">
           <div class="md-list-text-container">
@@ -29,6 +30,7 @@
     <br>
     <md-card v-if="user.loginname">
       <md-subheader>最近参与的话题</md-subheader>
+      <md-card-content v-if="user.recent_replies.length === 0">无话题</md-card-content>
       <md-list class="md-triple-line md-dense">
         <md-list-item v-for="topic in user.recent_replies" :key="topic.id">
           <md-avatar>
