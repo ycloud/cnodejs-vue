@@ -5,6 +5,7 @@ import Home from '@/views/home'
 Vue.use(Router)
 
 export default new Router({
+  base: '/cnodejs/vue/',
   mode: 'history',
   routes: [
     {
