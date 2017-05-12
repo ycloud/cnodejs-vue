@@ -66,7 +66,7 @@ export default new Router({
       path: '/m',
       name: 'Me',
       component (resolve) {
-        require(['@/views/me'], resolve)
+        require(['@/views/user'], resolve)
       },
       meta: {
         module: 'Me',

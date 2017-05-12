@@ -2,7 +2,13 @@ import api from '@/api'
 import * as types from '../mutation-types'
 
 const state = {
-  user: {}
+  user: {
+    loginname: ''
+  }
+}
+
+const getters = {
+  loginname: state => state.user.loginname
 }
 
 const mutations = {
@@ -22,6 +28,7 @@ const actions = {
 }
 
 export default {
+  getters,
   state,
   actions,
   mutations

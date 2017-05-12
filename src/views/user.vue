@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -57,7 +57,7 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
-      vm.getUser(to.params.loginname)
+      vm.getUser(to.name === 'Me' ? vm.loginname : to.params.loginname)
         .then(user => {
           vm.user = user
         })
@@ -67,9 +67,12 @@ export default {
         })
     })
   },
+  computed: mapGetters([
+    'loginname'
+  ]),
   watch: {
     $route () {
-      this.getUser(this.$route.params.loginname)
+      this.$route.name === 'Me' || this.getUser(this.$route.params.loginname)
         .then(user => {
           this.user = user
         })
