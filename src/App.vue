@@ -1,5 +1,5 @@
 <template>
-  <md-layout md-column md-gutter id="app">
+  <md-layout md-column id="app">
     <md-toolbar @touchmove.native.prevent class="md-dense">
       <h2 class="md-title">cnodejs vue share.la</h2>
       <div class="md-subheading">
@@ -9,9 +9,7 @@
     <md-bottom-bar>
       <md-bottom-bar-item v-for="nav in navs" :md-icon="nav.icon" :md-active="module === nav.module" :key="nav.to" @click.native="$router.push(nav.to)">{{nav.label}}</md-bottom-bar-item>
     </md-bottom-bar>
-    <md-layout>
-      <router-view @click.native="link" @scroll.native="scroll" class="wrap" ref="wrap"></router-view>
-    </md-layout>
+    <router-view @click.native="link" @scroll.native="scroll" class="wrap" ref="wrap"></router-view>
     <md-progress v-if="loading" class="loading" md-indeterminate></md-progress>
     <md-dialog-alert :md-content="error || '出错了！'" md-ok-text="知道了" ref="alert" @close="close"></md-dialog-alert>
   </md-layout>
@@ -60,7 +58,11 @@ export default {
       !error || this.$refs.alert.open()
     },
     $route () {
-      if (this.$refs.wrap) this.$refs.wrap.$el.scrollTop = 0
+      let wrap = this.$refs.wrap
+      if (wrap) {
+        wrap.$el.scrollTop = 0
+        if (wrap.$refs.list) wrap.$refs.list.$el.scrollTop = 0
+      }
     }
   },
   methods: {
@@ -83,14 +85,19 @@ export default {
       }
     },
     popstate (event) {
-      if (event.state && event.state.scrollTop) {
-        this.$refs.wrap.$el.scrollTop = event.state.scrollTop
-      }
+      let state = event.state
+      if (state === null) return
+      if (state.scrollTop) this.$refs.wrap.$el.scrollTop = state.scrollTop
+      if (state.homeScrollTop) this.$refs.wrap.$refs.list.$el.scrollTop = state.homeScrollTop
     },
     scroll (event) {
-      let state = history.state || {}
-      state.scrollTop = event.target.scrollTop
-      history.replaceState(state, null)
+      clearTimeout(this.timer)
+      let target = event.target
+      this.timer = setTimeout(() => {
+        let state = history.state || {}
+        state.scrollTop = target.scrollTop
+        history.replaceState(state, null)
+      }, 200)
     }
   },
   mounted () {
@@ -107,6 +114,7 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 #app > .loading{
   position: absolute;
@@ -138,15 +146,11 @@ export default {
   order: 9;
   z-index: 1;
 }
-.md-bottom-bar + div{
-  width: 100%;
-  height: calc(100% - 56px);
-}
 .wrap{
   flex: 1;
   overflow-y: auto;
-  height: 100%;
-  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  height: calc(100% - 56px);
 }
 @media (min-width: 768px){
   .md-toolbar{
@@ -155,7 +159,7 @@ export default {
   .md-bottom-bar{
     display: none;
   }
-  .md-bottom-bar + div{
+  .wrap{
     height: calc(100% - 64px);
   }
 }
