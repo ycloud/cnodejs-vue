@@ -72,6 +72,16 @@ export default new Router({
         module: 'Me',
         requiresAuth: true
       }
+    },
+    {
+      path: '*',
+      name: 'Error',
+      component (resolve) {
+        require(['@/views/error'], resolve)
+      },
+      meta: {
+        module: 'Error'
+      }
     }
   ]
 })

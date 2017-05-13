@@ -1,12 +1,12 @@
 <template>
   <md-layout md-column id="app">
-    <md-toolbar @touchmove.native.prevent class="md-dense">
+    <md-toolbar v-if="module !== 'Error'" @touchmove.native.prevent class="md-dense">
       <h2 class="md-title">cnodejs vue share.la</h2>
       <div class="md-subheading">
         <router-link v-for="nav in navs" :to="nav.to" class="has-ripple" :key="nav.to" :active="module === nav.module"><md-ink-ripple />{{nav.label}}</router-link>
       </div>
     </md-toolbar>
-    <md-bottom-bar>
+    <md-bottom-bar v-if="module !== 'Error'">
       <md-bottom-bar-item v-for="nav in navs" :md-icon="nav.icon" :md-active="module === nav.module" :key="nav.to" @click.native="$router.push(nav.to)">{{nav.label}}</md-bottom-bar-item>
     </md-bottom-bar>
     <router-view @click.native="link" @scroll.native="scroll" class="wrap" ref="wrap"></router-view>
