@@ -4,7 +4,7 @@
       <md-card-header>
         <md-card-header-text>
           <div class="md-title" v-title :data-title="topic.title">{{topic.title}}</div>
-          <div class="md-subhead"><router-link :to="'/user/' + topic.author.loginname">{{topic.author.loginname}}</router-link> {{topic.last_reply_at | timeago}}发表
+          <div class="md-subhead"><router-link :to="'/user/' + topic.author.loginname">{{topic.author.loginname}}</router-link> {{topic.create_at | timeago}}发表
       | {{topic.visit_count}}次浏览</div>
         </md-card-header-text>
       </md-card-header>
