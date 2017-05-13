@@ -4,7 +4,7 @@
       <md-card-header>
         <md-card-header-text>
           <div class="md-title" v-title :data-title="topic.title">{{topic.title}}</div>
-          <div class="md-subhead"><router-link :to="'/user/' + topic.author.loginname">{{topic.author.loginname}}</router-link> {{topic.last_reply_at | fromNow}}发表
+          <div class="md-subhead"><router-link :to="'/user/' + topic.author.loginname">{{topic.author.loginname}}</router-link> {{topic.last_reply_at | timeago}}发表
       | {{topic.visit_count}}次浏览</div>
         </md-card-header-text>
       </md-card-header>
@@ -29,7 +29,7 @@
                   <router-link tag="span" :to="'/user/' + reply.author.loginname">
                     {{reply.author.loginname}}
                   </router-link>
-                  {{reply.create_at | fromNow}}
+                  {{reply.create_at | timeago}}
                   <span class="like">
                     <md-icon>thumb_up</md-icon> <span><template v-if="reply.ups.length">{{reply.ups.length}}</template></span>
                   </span>

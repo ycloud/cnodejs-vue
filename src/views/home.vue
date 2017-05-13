@@ -17,7 +17,7 @@
         </div>
         <div class="md-list-action md-body-1">
           <router-link :to="'/topic/' + topic.id" tag="span">
-          {{topic.last_reply_at | fromNow}}
+          {{topic.last_reply_at | timeago}}
           </router-link>
         </div>
         <md-divider></md-divider>
