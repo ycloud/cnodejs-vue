@@ -1,10 +1,10 @@
 <template>
-  <md-layout md-column>
+  <md-layout md-column v-title :data-title="title">
     <md-tabs md-fixed ref="tab" @click.native="switchTab">
       <md-tab v-for="t in tabs" :id="t.id" :md-active="tab === t.id" :key="t.id" :md-label="t.label">
       </md-tab>
     </md-tabs>
-    <md-list @scroll.native="scroll" ref="list" class="md-triple-line" v-title data-title="cnodejs vue share.la">
+    <md-list @scroll.native="scroll" ref="list" class="md-triple-line">
       <md-list-item v-for="topic in topics.list" :key="tab + topic.id">
         <md-avatar>
           <router-link :to="'/user/' + topic.author.loginname">
@@ -39,9 +39,16 @@ export default {
       if (vm.topics.list.length === 0) vm.getTopics()
     })
   },
-  computed: mapGetters([
-    'tab', 'tabs', 'topics', 'loading'
-  ]),
+  computed: {
+    ...mapGetters([
+      'tab', 'tabs', 'topics', 'loading'
+    ]),
+    title () {
+      if (this.tab === 'all') return 'cnodejs vue share.la'
+      if (this.tab === 'good') return '精华话题'
+      return this.tabs.find(tab => tab.id === this.tab).label + '版块'
+    }
+  },
   methods: {
     ...mapActions([
       'getTopics', 'setTab'

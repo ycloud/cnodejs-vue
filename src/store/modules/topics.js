@@ -39,9 +39,7 @@ const state = {
 const getters = {
   tab: state => state.tab,
   tabs: state => state.tabs,
-  topics: state => state.tabs.find(tab => {
-    return tab.id === state.tab
-  })
+  topics: state => state.tabs.find(tab => tab.id === state.tab)
 }
 
 const mutations = {
@@ -52,9 +50,7 @@ const mutations = {
     state.details[topic.id] = topic
   },
   [types.UPDATE_TOPICS] (state, data) {
-    let tabTopics = state.tabs.find(tab => {
-      return tab.id === data.tab
-    })
+    let tabTopics = state.tabs.find(tab => tab.id === data.tab)
     if (data.topics.length < 40 || tabTopics.page === 99) {
       tabTopics.hasMore = false
     } else {
