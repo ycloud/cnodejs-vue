@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'tab', 'tabs', 'topics', 'loading'
+      'tab', 'tabs', 'topics'
     ]),
     title () {
       if (this.tab === 'all') return 'cnodejs vue share.la'
@@ -60,8 +60,7 @@ export default {
         let state = history.state || {}
         state.homeScrollTop = target.scrollTop
         history.replaceState(state, null)
-        if (this.loading ||
-          target.scrollTop === 0 ||
+        if (target.scrollTop === 0 ||
           target.scrollHeight - target.offsetHeight - target.scrollTop > 200) return
         this.getTopics()
       }, 200)
