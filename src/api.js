@@ -21,7 +21,8 @@ http.interceptors.response.use((response) => {
   return response.data
 }, error => {
   store.commit(types.TOGGLE_LOADING, false)
-  if (error.response.status === 401 &&
+  if (error.response &&
+    error.response.status === 401 &&
     error.response.config.url.endsWith('/accesstoken')) {
     return Promise.reject(error)
   }
