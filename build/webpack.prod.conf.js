@@ -77,7 +77,10 @@ var webpackConfig = merge(baseWebpackConfig, {
           /\.js$/.test(module.resource) &&
           module.resource.indexOf(
             path.join(__dirname, '../node_modules')
-          ) === 0
+          ) === 0 &&
+          module.resource.indexOf(
+            path.join(__dirname, '../node_modules/vue-material')
+          ) !== 0
         )
       }
     }),
