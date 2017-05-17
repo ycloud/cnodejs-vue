@@ -103,8 +103,9 @@ export default {
 .md-list-text-container>:first-child{
   font-size: 14px;
 }
-.md-list-action{
+.wrap .md-list .md-list-item .md-list-action{
   width: 62px;
+  margin: 0 0 0 10px;
   text-align: right;
   white-space: nowrap;
   color: rgba(0,0,0,.54);
