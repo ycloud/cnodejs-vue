@@ -65,8 +65,7 @@ export default {
           vm.user = user
         })
         .catch(error => {
-          console.error(error)
-          vm.$router.replace(from.fullPath)
+          error !== 400 || vm.$router.replace('/404')
         })
     })
   },
@@ -80,8 +79,7 @@ export default {
           this.user = user
         })
         .catch(error => {
-          console.error(error)
-          this.$router.back()
+          error !== 400 || this.$router.replace('/404')
         })
     }
   },

@@ -2,32 +2,30 @@ import api from '@/api'
 import * as types from '../mutation-types'
 
 const state = {
-  user: {
-    loginname: ''
-  }
+  loginname: ''
 }
 
 const getters = {
-  loginname: state => state.user.loginname
+  loginname: state => state.loginname
 }
 
 const mutations = {
-  [types.UPDATE_USER] (state, user) {
-    state.user = user
+  [types.SET_ACCOUNT] (state, account) {
+    Object.assign(state, account)
   }
 }
 
 const actions = {
   sign ({commit}, token) {
     return api.postToken(token)
-    .then(user => {
+    .then(account => {
       commit(types.SET_TOKEN, token)
-      commit(types.UPDATE_USER, user)
+      commit(types.SET_ACCOUNT, account)
     })
   },
   signout ({commit}, token) {
     commit(types.SET_TOKEN, '')
-    commit(types.UPDATE_USER, {
+    commit(types.SET_ACCOUNT, {
       loginname: ''
     })
   }

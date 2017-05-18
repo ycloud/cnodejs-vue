@@ -59,7 +59,7 @@ const mutations = {
     }
     topics.list = topics.list.concat(data.topics)
   },
-  [types.UPDATE_TOPICS_LOADING] (state, data) {
+  [types.TOGGLE_TOPICS_LOADING] (state, data) {
     let topics = state.tabs.find(tab => tab.id === data.tab)
     topics.loading = data.loading
   }
@@ -83,7 +83,7 @@ const actions = {
     }
     let tab = getters.tab
     if (tab !== 'all') data.tab = tab
-    commit(types.UPDATE_TOPICS_LOADING, {
+    commit(types.TOGGLE_TOPICS_LOADING, {
       tab,
       loading: true
     })
@@ -93,13 +93,13 @@ const actions = {
         tab,
         topics
       })
-      commit(types.UPDATE_TOPICS_LOADING, {
+      commit(types.TOGGLE_TOPICS_LOADING, {
         tab,
         loading: false
       })
     })
     .catch(() => {
-      commit(types.UPDATE_TOPICS_LOADING, {
+      commit(types.TOGGLE_TOPICS_LOADING, {
         tab,
         loading: false
       })

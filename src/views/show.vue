@@ -47,7 +47,6 @@
 
 <script>
 import marked from 'marked'
-import store from '@/store'
 import { mapActions } from 'vuex'
 
 export default {
@@ -68,13 +67,14 @@ export default {
             vm.topic = topic
           })
           .catch(error => {
-            console.error(error)
-            vm.$router.replace(from.fullPath)
+            error !== 400 || vm.$router.replace('/404')
           })
       })
     } else {
-      store.commit('SET_ERROR', '非法操作')
-      next(false)
+      next({
+        path: '/404',
+        replace: true
+      })
     }
   },
   methods: {
