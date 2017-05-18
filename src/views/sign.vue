@@ -29,9 +29,11 @@ export default {
           .then(() => {
             vm.$router.replace(vm.$route.query.redirect || '/m')
           })
-          .catch(() => {
-            vm.hasLocalToken = false
-            localStorage.removeItem('token')
+          .catch(error => {
+            if (error === 400) {
+              vm.hasLocalToken = false
+              localStorage.removeItem('token')
+            }
           })
       })
     } else {

@@ -21,11 +21,13 @@ http.interceptors.response.use((response) => {
   return response.data
 }, error => {
   store.commit(types.TOGGLE_LOADING, false)
-  if (error.message === 'Network Error') return Promise.reject(400)
-  if (error.response &&
-    error.response.status === 401 &&
-    error.response.config.url.endsWith('/accesstoken')) {
-    return Promise.reject(error)
+  if (
+    error.message === 'Network Error' ||
+    (error.response &&
+    error.response.status > 399 &&
+    error.response.status < 500)
+  ) {
+    return Promise.reject(400)
   }
   store.commit(types.SET_ERROR, '服务器太忙了，需要休息一下！')
   return Promise.reject(error)
