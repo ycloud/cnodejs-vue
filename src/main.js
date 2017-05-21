@@ -22,6 +22,7 @@ import router from './router'
 import store from './store'
 import timeago from 'timeago.js'
 import App from './App'
+import Title from './components/Title'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import 'vue-material/dist/vue-material.css'
@@ -49,9 +50,7 @@ Vue.use(mdToolbar)
 Vue.use(mdWhiteframe)
 Vue.use(Vuex)
 
-Vue.directive('title', (el, binding) => {
-  document.title = el.dataset.title
-})
+Vue.component('VTitle', Title)
 
 const timeagoFormat = timeago().format
 Vue.filter('timeago', time => timeagoFormat(time, 'zh_CN'))

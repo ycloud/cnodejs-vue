@@ -1,6 +1,7 @@
 <template>
   <div>
-    <md-card v-if="user.loginname" v-title :data-title="user.loginname + '的个人主页'">
+    <v-title>{{user.loginname ? user.loginname + '的主页' : '用户资料加载中...'}}</v-title>
+    <md-card v-if="user.loginname">
       <md-card-header>
         <md-card-header-text>
           <div class="md-title">{{user.loginname}}</div>

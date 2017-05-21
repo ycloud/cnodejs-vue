@@ -1,5 +1,6 @@
 <template>
-  <md-layout md-column v-title :data-title="title">
+  <md-layout md-column>
+    <v-title>{{title}}</v-title>
     <md-tabs md-fixed ref="tab" @click.native="switchTab">
       <md-tab v-for="t in tabs" :id="t.id" :md-active="tab === t.id" :key="t.id" :md-label="t.label">
       </md-tab>

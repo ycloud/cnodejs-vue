@@ -1,5 +1,6 @@
 <template>
-  <md-list v-title data-title="收藏的话题" class="md-triple-line md-dense">
+  <md-list class="md-triple-line md-dense">
+    <v-title>收藏的话题</v-title>
     <md-list-item v-for="topic in collects" :key="topic.id">
       <md-avatar>
         <router-link :to="'/user/' + topic.author.loginname">

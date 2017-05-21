@@ -1,5 +1,6 @@
 <template>
-  <md-layout md-column md-align="center" class="sign" v-title data-title="登录">
+  <md-layout md-column md-align="center" class="sign">
+    <v-title>登录</v-title>
     <form v-if="!hasLocalToken" novalidate @submit.stop.prevent="submit">
       <md-input-container>
         <label>Access Token</label>

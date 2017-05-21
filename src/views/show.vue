@@ -1,9 +1,10 @@
 <template>
   <div>
+    <v-title>{{topic.id ? topic.title : '话题详情加载中...'}}</v-title>
     <md-card v-if="topic.id">
       <md-card-header>
         <md-card-header-text>
-          <div class="md-title" v-title :data-title="topic.title">{{topic.title}}</div>
+          <div class="md-title">{{topic.title}}</div>
           <div class="md-subhead"><router-link :to="'/user/' + topic.author.loginname">{{topic.author.loginname}}</router-link> {{topic.create_at | timeago}}发表
       | {{topic.visit_count}}次浏览</div>
         </md-card-header-text>
