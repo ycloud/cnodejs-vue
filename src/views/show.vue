@@ -10,7 +10,7 @@
         </md-card-header-text>
       </md-card-header>
       <md-divider></md-divider>
-      <md-card-content v-html="marked(topic.content)">
+      <md-card-content class="topic-content" v-html="marked(topic.content)">
       </md-card-content>
     </md-card>
     <br>
@@ -37,7 +37,7 @@
                 </span>
               </div>
             </md-layout>
-            <div class="md-body-2" v-html="marked(reply.content)"></div>
+            <div class="md-body-2 reply-content" v-html="marked(reply.content)"></div>
           </md-layout>
           <md-divider></md-divider>
         </md-list-item>
@@ -108,5 +108,9 @@ export default {
   min-width: 16px;
   min-height: 16px;
   margin-top: -3px;
+}
+.topic-content,
+.reply-content{
+  word-break: break-all;
 }
 </style>
