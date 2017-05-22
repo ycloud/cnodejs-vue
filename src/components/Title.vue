@@ -17,7 +17,7 @@ export default {
         slots.length < 1 ||
         typeof slots[0].text !== 'string') return
       let {text} = slots[0]
-      let title = document
+      let {title} = document
       if (text !== title) document.title = text
     }
   }
